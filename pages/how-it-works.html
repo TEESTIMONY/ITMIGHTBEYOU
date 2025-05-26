@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - IT MIGHT BE YOU</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Page-specific styles */
+        .page-banner {
+            background: linear-gradient(rgba(0, 87, 184, 0.8), rgba(0, 150, 57, 0.8)), url('../images/banner.jpg') center/cover no-repeat;
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .page-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .process-section {
+            padding: 80px 0;
+        }
+        
+        .process-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .process-step {
+            display: flex;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 90px;
+            left: 45px;
+            width: 2px;
+            height: calc(100% - 30px);
+            background-color: var(--accent-color);
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-right: 30px;
+            z-index: 1;
+        }
+        
+        .step-content {
+            padding-top: 15px;
+        }
+        
+        .step-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .step-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+        }
+        
+        .step-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .step-content ul li {
+            list-style-type: disc;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .fee-details {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+        
+        .fee-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .fee-card {
+            width: 300px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .fee-card-header {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .fee-card-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .fee-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .fee-frequency {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-top: 5px;
+        }
+        
+        .fee-details-list {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .fee-details-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .fee-details-list li i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+        
+        .reward-section {
+            padding: 80px 0;
+        }
+        
+        .reward-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .reward-card {
+            width: 300px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .reward-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reward-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .reward-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .reward-card:hover .reward-image img {
+            transform: scale(1.1);
+        }
+        
+        .reward-content {
+            padding: 20px;
+        }
+        
+        .reward-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .reward-content p {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer p {
+            padding-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-section .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+        
+        .cta-section .btn-primary:hover {
+            background-color: #e6b800;
+        }
+        
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .process-step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .process-step:not(:last-child)::after {
+                left: 365px;
+                top: 90px;
+                height: calc(100% - 90px);
+            }
+            
+            .fee-card, .reward-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><a href="../index.html">IT MIGHT BE YOU</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="how-it-works.html" class="active">How It Works</a></li>
+                <li><a href="winners.html">Winners</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-login">Login</a>
+                <a href="signup.html" class="btn btn-signup">Sign Up</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-banner">
+            <div class="container">
+                <h1>How IT MIGHT BE YOU Works</h1>
+                <p>Our platform is designed to be simple, transparent, and fair. Here's everything you need to know about how we operate and how you can benefit.</p>
+            </div>
+        </section>
+
+        <section class="process-section">
+            <div class="container">
+                <h2 class="section-title">Our Process</h2>
+                
+                <div class="process-container">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Register to Join Our Community</h3>
+                            <p>The first step is to create your account on our platform. Registration is quick, simple, and affordable.</p>
+                            <ul>
+                                <li>Complete the signup form with your personal details</li>
+                                <li>Verify your email address and phone number</li>
+                                <li>Pay the one-time registration fee of ₦500</li>
+                                <li>Your account will be activated within 24 hours</li>
+                            </ul>
+                            <p>The registration fee helps us maintain the platform, verify your identity, and ensure only serious participants join our community.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Contribute to Quarterly Draws</h3>
+                            <p>Once registered, you'll be eligible to participate in our quarterly draws. These happen four times a year (every three months).</p>
+                            <ul>
+                                <li>Pay ₦1000 for each quarterly draw you wish to participate in</li>
+                                <li>You can pay for multiple draws in advance</li>
+                                <li>Payment deadlines are clearly communicated via email and SMS</li>
+                                <li>Missing a payment means you won't be included in that particular draw</li>
+                            </ul>
+                            <p>Your contributions help build the prize pool that will change lives within our community.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Transparent Selection Process</h3>
+                            <p>We use advanced technology to ensure our selection process is completely fair and transparent.</p>
+                            <ul>
+                                <li>Draws are conducted using a tamper-proof random number generator</li>
+                                <li>All draws are broadcast live on our platform</li>
+                                <li>Independent auditors verify the process</li>
+                                <li>Winners are announced immediately after each draw</li>
+                                <li>Complete list of winners (by ID) is published on our website</li>
+                            </ul>
+                            <p>We pride ourselves on transparency - you can trust that every member has an equal chance of being selected.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Receive Your Empowerment</h3>
+                            <p>If selected, you'll receive your empowerment package within days of the draw.</p>
+                            <ul>
+                                <li>Cash winners receive ₦5 million directly to their bank account</li>
+                                <li>Equipment winners receive their tools within 14 days</li>
+                                <li>Training opportunities are scheduled based on availability</li>
+                                <li>All winners are verified before disbursement</li>
+                            </ul>
+                            <p>We follow up with winners to document their success stories and measure our impact. Once you win the ₦5 million prize, you become ineligible for future cash prizes, but can still win equipment or training.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fee-details">
+            <div class="container">
+                <h2 class="section-title">Fee Structure</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">Our fee structure is designed to be affordable for all Nigerians while generating enough funds to create meaningful impact. Here's a breakdown of what you pay and where your money goes.</p>
+                
+                <div class="fee-cards">
+                    <div class="fee-card">
+                        <div class="fee-card-header">
+                            <h3>Registration Fee</h3>
+                            <div class="fee-amount">₦500</div>
+                            <div class="fee-frequency">One time only</div>
+                        </div>
+                        <ul class="fee-details-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Platform maintenance</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Identity verification</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Account setup</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Administrative costs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="fee-card">
+                        <div class="fee-card-header">
+                            <h3>Draw Contribution</h3>
+                            <div class="fee-amount">₦1,000</div>
+                            <div class="fee-frequency">Per quarter (4 times yearly)</div>
+                        </div>
+                        <ul class="fee-details-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Cash prize pool (50%)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Equipment and tools (30%)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Training programs (10%)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Operations and technology (10%)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="fee-card">
+                        <div class="fee-card-header">
+                            <h3>Total Annual Cost</h3>
+                            <div class="fee-amount">₦4,500</div>
+                            <div class="fee-frequency">First year (₦4,000 subsequent years)</div>
+                        </div>
+                        <ul class="fee-details-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>₦500 registration (first year only)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>₦1,000 × 4 quarterly draws</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Less than ₦400 per month</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Chance to win ₦5 million (1000× return)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reward-section">
+            <div class="container">
+                <h2 class="section-title">Rewards & Empowerment</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">Our platform offers various types of empowerment packages to help Nigerians achieve their dreams and improve their livelihoods.</p>
+                
+                <div class="reward-cards">
+                    <div class="reward-card">
+                        <div class="reward-image">
+                            <img src="../images/cash-reward.jpg" alt="Cash Reward">
+                        </div>
+                        <div class="reward-content">
+                            <h3>Cash Prize</h3>
+                            <p>100 members receive ₦5 million each per draw. This life-changing amount can be used to start a business, further education, or improve your life circumstances.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-image">
+                            <img src="../images/equipment-reward.jpg" alt="Equipment Reward">
+                        </div>
+                        <div class="reward-content">
+                            <h3>Equipment & Tools</h3>
+                            <p>Receive complete business equipment packages such as sewing machines, barbing kits, photography gear, farming tools, and other trade-specific equipment.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-image">
+                            <img src="../images/training-reward.jpg" alt="Training Reward">
+                        </div>
+                        <div class="reward-content">
+                            <h3>Training & Mentorship</h3>
+                            <p>Access to vocational training, business skills development, financial literacy courses, and mentorship from successful entrepreneurs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How are winners selected?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Winners are selected using a secure random number generator that is audited by independent third parties. Every draw is conducted live and can be viewed by all members. Each member has an equal chance of being selected, regardless of when they joined or their location.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What happens if I win multiple times?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Members who win the ₦5 million cash prize become ineligible for future cash prizes, but can still win equipment or training packages. This ensures that more people have the opportunity to benefit from the program. However, equipment and training winners remain eligible for all future draws.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I withdraw my contributions?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, contributions are non-refundable as they go directly into the prize pool and operational costs. Think of it as similar to buying a lottery ticket, except your chances of winning are much higher, and the impact is more meaningful.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What happens if I miss a quarterly payment?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you miss a quarterly payment, you simply won't be included in that particular draw. Your account remains active, and you can participate in future draws by making the ₦1,000 payment before the deadline. There are no penalties for missing payments.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How is this different from gambling?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>IT MIGHT BE YOU is a community empowerment platform, not a gambling service. The key differences are: 1) Our purpose is poverty alleviation and economic empowerment, 2) The contribution amount is small and fixed, 3) We provide multiple forms of empowerment beyond cash, 4) We follow up with winners to ensure proper utilization of funds, and 5) We operate with complete transparency and regulatory compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Change Your Life?</h2>
+                <p>Join thousands of Nigerians who are already part of our community. For just ₦500 registration and ₦1,000 per quarter, you could be the next big winner. Remember, IT MIGHT BE YOU!</p>
+                <a href="signup.html" class="btn btn-primary">Join Now</a>
+            </div>
+        </section>
+    </main>
+
+     <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>IT MIGHT BE YOU</h2>
+                    <p>Empowering 1 million Nigerians</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="pages/about.html">About Us</a></li>
+                            <li><a href="pages/how-it-works.html">How It Works</a></li>
+                            <li><a href="pages/winners.html">Winners</a></li>
+                            <li><a href="pages/faq.html">FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="pages/terms.html">Terms of Service</a></li>
+                            <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                            <li><a href="pages/disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="tel:+2348000000000"><i class="fas fa-phone"></i> +234 800 000 0000</a></li>
+                            <li><a href="mailto:info@itmightbeyou.ng"><i class="fas fa-envelope"></i> info@itmightbeyou.ng</a></li>
+                            <li><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="X (formerly Twitter)" class="x-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" class="x-logo">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IT MIGHT BE YOU. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+    <script>
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
